@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+      <h1 class="pvu-tool__title">PVU Tool</h1>
+      <input id="user-config" type="file" accept="application/JSON"/>
+      <div class="pvu-tool__user-config">
+
+      </div>
+    </body>
+    <script>
+  (function(){
+      function onChange(event) {
+          const reader = new FileReader();
+          reader.onload = onReaderLoad;
+          reader.readAsText(event.target.files[0]);
+      }
+
+      function onReaderLoad(event){
+          console.log(event.target.result);
+          const obj = JSON.parse(event.target.result);
+          const element = document.getElementsByClassName('pvu-tool__user-config')[0];
+          element.innerHTML = `${obj.name} ${obj.lastname}`;
+      }
+      document.getElementById('user-config').addEventListener('change', onChange);
+  }());
+    </script>
+</html>
